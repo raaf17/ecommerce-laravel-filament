@@ -40,8 +40,8 @@ class ProductResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateHydrated(function (string $operation, $state, Set $set) {
-                                if ($operation === 'create') {
+                            ->afterStateUpdated(function (string $operation, $state, Set $set) {
+                                if ($operation !== 'create') {
                                     return;
                                 }
                                 $set('slug', Str::slug($state));
